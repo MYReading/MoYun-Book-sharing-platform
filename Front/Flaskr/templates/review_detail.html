@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ review.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #a1c4fd, #00adff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .info {
+            margin-top: 20px;
+        }
+        .info p {
+            text-align: center;
+            margin: 5px 0;
+        }
+        .button-like, button[type="submit"] {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button-like:hover, button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .comment-form {
+            margin-top: 30px;
+        }
+        .comment-form div {
+            margin-bottom: 10px;
+        }
+        .comment-form input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .comment {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ review.title }}</h1>
+        <p><strong>Published on:</strong> {{ review.publish_time }}</p>
+        <p><strong>Content:</strong></p>
+        <p>{{ review.content }}</p>
+        <div class="info">
+            <p><strong>Likes:</strong> {{ likes }}</p>
+            <form action="/review/{{review.id}}/like" method="POST">
+                <button type="submit" class="button-like">点赞</button>
+            </form>
+        </div>
+        <div class="info">
+            <p><strong>Comments:</strong></p>
+            {% for followreview in followreviews %}
+                <div class="comment">{{ followreview.content }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="comment-form">
+            <h2>写评论</h2>
+            <form action="/review/{{review.id}}" method="POST">
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.content.label }}
+                    {{ form.content(size=60) }}
+                </div>
+                <div>
+                    <button type="submit">Post Review</button>
+                </div>
+            </form>
+        </div>
+        <a href="{{ url_for('bookspage' ) }}" class="back-link">返回书架</a>
+    </div>
+</body>
+</html>

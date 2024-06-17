@@ -1,0 +1,20 @@
+#数据库配置(目前仅可用MySQL)
+Database:
+  Type: "MySQL" # 数据库类型
+  Driver: "pymysql" # 数据库驱动
+  Host: "localhost" # 数据库地址
+  Port: 3306 # 数据库端口
+  Database: "moyun" #数据库名
+  Account: "MoYun_Admin" # 数据库管理员账号
+  Password: "MoYun_Admin" # 数据库管理员密码
+
+# 平台管理员账号
+Admin:
+  Account: "MoYun_Admin" # 管理员账号
+  Password: "MoYun_Admin" # 管理员密码
+  ID: 1 # 管理员ID，一般1号用户为管理员
+  # 以下是profile页的一些外显的个人信息，不写的留空即可
+  E-Mail: ""
+  Telephone: ""
+  Signature: "道阻且长" # 管理员签名(可以理解为类似于QQ签名的东西)
+  ProfilePhoto: "" # 请在此指定管理员头像的路径

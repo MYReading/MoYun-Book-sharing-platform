@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Groups</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        .user-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .user-info h1 {
+            font-size: 28px;
+            color: #333;
+        }
+        .user-info p {
+            font-size: 16px;
+            color: #777;
+            margin: 5px 0;
+        }
+        h2 {
+            font-size: 22px;
+            color: #333;
+            text-align: center;
+        }
+        .group-list {
+            list-style: none;
+            padding: 0;
+        }
+        .group-list li {
+            margin: 10px 0;
+            text-align: center;
+        }
+        .group-list a {
+            display: inline-block;
+            background-color: #4a90e2;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .group-list a:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="user-info">
+        <h1>你好</h1>
+        <p>用户{{user_name}}</p>
+        <p>Email:{{user_email}}</p>
+    </div>
+    <h2>我的圈子</h2>
+    <ul class="group-list">
+        {% for group in groups %}
+            <li>
+                <a href="{{url_for('group_detail_student',group_id=group['id'])}}">{{group['name']}}</a>
+            </li>
+        {%endfor%}
+    </ul>
+</div>
+</body>
+</html>

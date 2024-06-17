@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>帖子详情</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fd2179, #4a90e2);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 70%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .post {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        .post-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .post-date {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .replies {
+            padding-top: 20px;
+        }
+        .reply {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-left: 3px solid #007bff;
+            background: #f9f9f9;
+        }
+        .reply-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .reply-date {
+            color: #999;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+        .reply-content {
+            margin-bottom: 10px;
+        }
+        .reply-form {
+            margin-top: 20px;
+        }
+        .reply-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .reply-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .reply-form button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>帖子详情</h1>
+    </header>
+    <div class="container">
+        <div class="post">
+            <div class="post-header">{{ author.account }} (帖主)</div>
+            <div class="post-date">{{ authorpost.post_time }}</div>
+            <div class="post-content">{{ authorpost.content }}</div>
+        </div>
+        <div class="replies">
+            {% for reply in replies %}
+            <div class="reply">
+                <div class="reply-header">{{ reply.author_id }}</div>
+                <div class="reply-date">{{ reply.reply_time }}</div>
+                <div class="reply-content">{{ reply.content }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="reply-form">
+            <form method="POST" action="{{ url_for('post_detail_teacher', post_id=authorpost.id) }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {{ form.content(class="form-control", rows=4) }}
+                </div>
+                <button type="submit" class="btn btn-primary">发布回复</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

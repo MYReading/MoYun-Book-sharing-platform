@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建圈子</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+        }
+        .form-group label {
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #4a90e2;
+            border-color: #4a90e2;
+        }
+        .btn-primary:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>创建圈子</h1>
+    <form method="POST" action="{{ url_for('add_group') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.circle_name.label(class="form-control-label") }}
+            {{ form.circle_name(class="form-control", placeholder="请输入圈子名称") }}
+        </div>
+        <div class="form-group">
+            {{ form.circle_description.label(class="form-control-label") }}
+            {{ form.circle_description(class="form-control", rows=4, placeholder="请输入圈子描述") }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">创建圈子</button>
+    </form>
+</div>
+</body>
+</html>

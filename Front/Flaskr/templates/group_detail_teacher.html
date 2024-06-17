@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>论坛发帖交流页面</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fd2179, #4a90e2);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #f6f6f6;
+            color: #000;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form input, form textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        form .submit-container {
+            text-align: center; /* 使按钮居中 */
+        }
+        form button {
+            background: #007bff; /* 蓝色 */
+            color: white;
+            border: none;
+            padding: 10px 70px; /* 调整按钮大小 */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        form button:hover {
+            background: #0056b3; /* 鼠标悬停时颜色 */
+        }
+        #posts {
+            list-style-type: none;
+            padding: 0;
+        }
+        #posts li {
+            margin: 10px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-left: 5px solid #007bff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.05);
+        }
+        #posts a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #007bff;
+            font-weight: bold;
+        }
+        #posts a:hover {
+            text-decoration: underline;
+        }
+        #posts span {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        .add-user-link {
+            display: inline-block;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .add-user-link:hover {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ group_name }}</h1>
+    </header>
+    <div class="container">
+        <h2>群用户:</h2>
+        {% for user in users %}
+        {{ user.role }}:{{ user.account }}&nbsp;&nbsp;
+        {% endfor %}
+        <h2></h2>
+        <a href="{{url_for('addstudent_togroup',group_id=group_id)}}" class="add-user-link">添加圈子用户</a>
+
+        <form method="POST" action="{{ url_for('group_detail_teacher', group_id=group_id) }}">
+            {{ form.hidden_tag() }}
+            <h2>发帖</h2>
+            <div>
+                {{ form.title.label }}
+                {{ form.title(size=32) }}
+            </div>
+            <div>
+                {{ form.content.label }}
+                {{ form.content(rows=4) }}
+            </div>
+            <div class="submit-container">
+                <button type="submit">发表</button>
+            </div>
+        </form>
+        <h2>帖子列表</h2>
+        <ul id="posts">
+            {% for post in posts %}
+            <li><a href="{{url_for('post_detail_teacher',post_id=post.id)}}">{{ post.title }}</a><span>发表于 {{ post.post_time }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

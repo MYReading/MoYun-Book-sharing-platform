@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 90%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+        .login-container button {
+            padding: 15px 20px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .login-container .register-btn {
+            background-color: #6c757d;
+        }
+        .login-container .register-btn:hover {
+            background-color: #565e64;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>请登录</h1>
+        <!-- Error message section -->
+        {% if error %}
+            <p class="error-message"><strong>Error</strong>: {{error}}</p>
+        {% endif %}
+        <form method="POST">
+            {{ form.role.label }} {{ form.role }}<br>
+            {{ form.username.label }} {{ form.username }}<br>
+            {{ form.password.label }} {{ form.password }}<br>
+            <button type="submit">Login</button>
+            <button type="button" class="register-btn" onclick="location.href='/register'">Register</button>
+        </form>
+    </div>
+</body>
+</html>
